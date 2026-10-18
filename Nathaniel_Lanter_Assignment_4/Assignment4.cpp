@@ -1,6 +1,6 @@
 /*
- * Program Name : 
- * Description  :
+ * Program Name : Sudoku solver
+ * Description  :Solves Sudoku using recursion
  * 
  * Inputs       : 
  * Output       : 
@@ -11,22 +11,22 @@
  * Revision date: 10/15/2026
  */
 
-#include <iostream>   // 
-#include <fstream>    // 
-#include <string>     // 
-#include <vector>     // 
-#include <array>      // 
+#include <iostream>   // input and output library
+#include <fstream>    // allows for file input 
+#include <string>     // allows for name input of files
+#include <vector>     // resizeable array where memory is automatically allocated
+#include <array>      // array library
 
-//
+//class definitinon
 class Puzzle {
 public:
-    static const int SIZE = 9;                 // 
+    static const int SIZE = 9;                 // size of the sudoku
 
     Puzzle() {                                 // 
         for (auto& row : cells) row.fill(0);   // 
     }
 
-    //
+    //loads file
     bool loadFromFile(const std::string& fileName) {
         std::ifstream in(fileName);            // 
         if (!in) return false;                 // 
