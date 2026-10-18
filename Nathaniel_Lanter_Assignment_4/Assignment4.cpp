@@ -22,8 +22,8 @@ class Puzzle {
 public:
     static const int SIZE = 9;                 // size of the sudoku
 
-    Puzzle() {                                 // 
-        for (auto& row : cells) row.fill(0);   // 
+    Puzzle() {                                 
+        for (auto& row : cells) row.fill(0);   
     }
 
     //loads file
