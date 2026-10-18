@@ -2,8 +2,8 @@
  * Program Name : Sudoku solver
  * Description  :Solves Sudoku using recursion
  * 
- * Inputs       : 
- * Output       : 
+ * Inputs       : Puzzle files
+ * Output       : solved puzzles in the form of terminal output
  * Collaborators: 
  * Other sources: 
  * Author       : Nathaniel Lanter
@@ -23,12 +23,12 @@ public:
     static const int SIZE = 9;                 // size of the sudoku
 
     Puzzle() {                                 
-        for (auto& row : cells) row.fill(0);   
+        for (auto& row : cells) row.fill(0);   //constructor
     }
 
     //loads file
     bool loadFromFile(const std::string& fileName) {
-        std::ifstream in(fileName);            // 
+        std::ifstream in(fileName);            
         if (!in) return false;                 // 
         int count = 0;                         //
         char ch;                               // 
