@@ -65,9 +65,7 @@ private:
     std::array<std::array<int, SIZE>, SIZE> cells;          // 
 };
 
-// ---------------------------------------------------------------------------
-// 
-// ---------------------------------------------------------------------------
+//solves the puzzle using recursive backtracking
 class Solver {
 public:
     explicit Solver(const Puzzle& start) : board(start) {   // copy the puzzle to work on
