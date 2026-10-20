@@ -28,9 +28,9 @@ public:
 
     //loads file
     bool loadFromFile(const std::string& fileName) {
-        std::ifstream in(fileName);            
+        std::ifstream in(fileName);            // finds file by name
         if (!in) return false;                 // 
-        int count = 0;                         //bounds for while loop
+        int count = 0;                         //bounds while loop
         char ch;                               //character for 
         while (count < SIZE * SIZE && in.get(ch)) {  // 
             if (ch >= '1' && ch <= '9') {              // 
