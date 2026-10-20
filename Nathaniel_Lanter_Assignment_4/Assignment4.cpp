@@ -31,8 +31,8 @@ public:
         std::ifstream in(fileName);            // finds file by name
         if (!in) return false;                 // 
         int count = 0;                         //bounds while loop
-        char ch;                               //character for 
-        while (count < SIZE * SIZE && in.get(ch)) {  // 
+        char ch;                               //character in sudoku grid
+        while (count < SIZE * SIZE && in.get(ch)) {  // main loop to
             if (ch >= '1' && ch <= '9') {              // 
                 cells[count / SIZE][count % SIZE] = ch - '0';  // 
                 count++;                               //
