@@ -30,8 +30,8 @@ public:
     bool loadFromFile(const std::string& fileName) {
         std::ifstream in(fileName);            
         if (!in) return false;                 // 
-        int count = 0;                         //
-        char ch;                               // 
+        int count = 0;                         //bounds for while loop
+        char ch;                               //character for 
         while (count < SIZE * SIZE && in.get(ch)) {  // 
             if (ch >= '1' && ch <= '9') {              // 
                 cells[count / SIZE][count % SIZE] = ch - '0';  // 
@@ -72,7 +72,7 @@ public:
         for (int i = 0; i < 9; i++) rowUsed[i] = colUsed[i] = boxUsed[i] = 0;  // nothing used yet
     }
 
-    // 
+    // returns the 
     int solve() {
         solutions.clear();                          // 
         if (!initMasks()) return 0;                 // 
