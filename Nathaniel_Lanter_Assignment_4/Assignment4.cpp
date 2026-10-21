@@ -92,22 +92,22 @@ private:
     std::vector<Puzzle> solutions;                  // every solution found
     static int boxIndex(int r, int c) { return (r / 3) * 3 + (c / 3); }  // turns row and column into box number 0-8
 
-    int countGivens() const {                       // 
-        int n = 0;
-        for (int r = 0; r < 9; r++)
-            for (int c = 0; c < 9; c++)
-                if (board.get(r, c) != 0) n++;
+    int countGivens() const {                       //  counts the cells that start filled in
+        int n = 0;                                  // running count 
+        for (int r = 0; r < 9; r++)                 // each row
+            for (int c = 0; c < 9; c++)             //each column
+                if (board.get(r, c) != 0) n++;      // total filled cells
         return n;
     }
 
-    //
+    //sets up the used-digit masks from the given numbers, false if a given number repeats
     bool initMasks() {
-        for (int r = 0; r < 9; r++) {
-            for (int c = 0; c < 9; c++) {
-                int d = board.get(r, c);            //
-                if (d == 0) continue;               // 
-                int bit = 1 << (d - 1);             // 
-                int b = boxIndex(r, c);             // 
+        for (int r = 0; r < 9; r++) {               // each row
+            for (int c = 0; c < 9; c++) {           // each column
+                int d = board.get(r, c);            // digit in this cell
+                if (d == 0) continue;               // skips blank cells
+                int bit = 1 << (d - 1);             // makes a number with only the bit for this digit set
+                int b = boxIndex(r, c);             // which box this cell is in
                 if ((rowUsed[r] & bit) || (colUsed[c] & bit) || (boxUsed[b] & bit))
                     return false;                   // 
                 rowUsed[r] |= bit;                  // 
