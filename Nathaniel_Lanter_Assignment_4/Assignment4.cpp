@@ -4,7 +4,7 @@
  * 
  * Inputs       : Puzzle files
  * Output       : solved puzzles in the form of terminal output
- * Collaborators: 
+ * Collaborators: Claude
  * Other sources: 
  * Author       : Nathaniel Lanter
  * Creation date: 10/15/2026
@@ -32,7 +32,7 @@ public:
         if (!in) return false;                 // 
         int count = 0;                         //bounds while loop
         char ch;                               //character in sudoku grid
-        while (count < SIZE * SIZE && in.get(ch)) {  // main loop to
+        while (count < SIZE * SIZE && in.get(ch)) {  // loop to convert files into something the program can work with
             if (ch >= '1' && ch <= '9') {              // 
                 cells[count / SIZE][count % SIZE] = ch - '0';  // 
                 count++;                               //
