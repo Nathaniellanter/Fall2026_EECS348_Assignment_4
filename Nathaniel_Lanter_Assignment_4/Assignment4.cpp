@@ -41,17 +41,17 @@ public:
                 cells[count / SIZE][count % SIZE] = ch - '0';  // 
                 count++;                               //increments 
             } else if (ch == '_' || ch == '0' || ch == '.') {  //check if valid character
-                cells[count / SIZE][count % SIZE] = 0;         // 
-                count++;                                       // 
-            }                                          // 
+                cells[count / SIZE][count % SIZE] = 0;         // stores 0 for a blank cell
+                count++;                                       // moves to next cell
+            }                                          
         }
-        return count == SIZE * SIZE;           //
+        return count == SIZE * SIZE;           //true only if 81 cells were read
     }
 
-    int get(int r, int c) const { return cells[r][c]; }     // 
-    void set(int r, int c, int v) { cells[r][c] = v; }      // 
+    int get(int r, int c) const { return cells[r][c]; }     // returns the number in row r, column c
+    void set(int r, int c, int v) { cells[r][c] = v; }      // puts number v in row r, column c
 
-    // 
+    // prints the grid with lines between the three 3x3 blocks
     void print(std::ostream& out) const {
         for (int r = 0; r < SIZE; r++) {                    // 
             if (r > 0 && r % 3 == 0) out << "------+-------+------\n";  // 
