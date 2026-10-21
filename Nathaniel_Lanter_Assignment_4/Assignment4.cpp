@@ -4,7 +4,7 @@
  * 
  * Inputs       : Puzzle files
  * Output       : solved puzzles in the form of terminal output
- * Collaborators: Claude
+ * Collaborators: Claude wrote the initial versiond
  * Other sources: none
  * Author       : Nathaniel Lanter
  * Creation date: 10/15/2026
@@ -22,8 +22,8 @@ class Puzzle {
 public:
     static const int SIZE = 9;                 // size of the sudoku
 
-    Puzzle() {                                 
-        for (auto& row : cells) row.fill(0);   //constructor
+    Puzzle() {                                  //constructor
+        for (auto& row : cells) row.fill(0);  
     }
 
     //loads file
@@ -35,7 +35,7 @@ public:
         while (count < SIZE * SIZE && in.get(ch)) {  // loop to convert files into something the program can work with
             if (ch >= '1' && ch <= '9') {              // check if valid digit
                 cells[count / SIZE][count % SIZE] = ch - '0';  // 
-                count++;                               //
+                count++;                               //increments 
             } else if (ch == '_' || ch == '0' || ch == '.') {  //check if valid character
                 cells[count / SIZE][count % SIZE] = 0;         // 
                 count++;                                       // 
