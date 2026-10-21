@@ -153,27 +153,27 @@ private:
     }
 };
 
-// creates puzzle and solver
+// loads puzzle file and solves it and prints it
 class PuzzleRunner {
 public:
-    explicit PuzzleRunner(const std::string& file) : fileName(file) {}  // 
+    explicit PuzzleRunner(const std::string& file) : fileName(file) {}  // saves the file name this runner will use
 
     void run() const {
-        std::cout << "==============================\n";
-        std::cout << fileName << "\n";                       //
-        Puzzle puzzle;                                       // 
-        if (!puzzle.loadFromFile(fileName)) {                // 
-            std::cout << "Could not read a valid puzzle from this file.\n\n";
-            return;                                          // 
+        std::cout << "==============================\n";     // line to separate puzzles in the output
+        std::cout << fileName << "\n";                       //prints the puzzle file name
+        Puzzle puzzle;                                       // empty puzzle to load into
+        if (!puzzle.loadFromFile(fileName)) {                // tries load the file
+            std::cout << "Could not read a valid puzzle from this file.\n\n"; //file missing or not 81 cells
+            return;                                          // nothing else to do for this file
         }
-        std::cout << "Puzzle:\n";
-        puzzle.print(std::cout);                             // 
+        std::cout << "Puzzle:\n";                            // label for the original puzzle
+        puzzle.print(std::cout);                             // print the puzzle from the file
 
-        Solver solver(puzzle);                               // 
-        int count = solver.solve();                          // 
-        if (count == 0) {                                    // 
-            std::cout << "\nNo solution found\n\n";          //
-            return;
+        Solver solver(puzzle);                               // makes a solver for this puzzle
+        int count = solver.solve();                          // solves it, count is number of solution
+        if (count == 0) {                                    // no solutions found
+            std::cout << "\nNo solution found\n\n";          // required message
+            return;                                          // done with this file
         }
         std::cout << "\nSolutions found: " << count << "\n"; // how many solutions there are
         int n = 1;                                           // solution number for labeling
