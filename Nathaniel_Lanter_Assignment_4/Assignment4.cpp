@@ -176,12 +176,12 @@ public:
             return;
         }
         std::cout << "\nSolutions found: " << count << "\n"; // 
-        int n = 1;                                           // 
-        for (const Puzzle& s : solver.getSolutions()) {      // 
-            std::cout << "\nSolution " << n++ << ":\n";
-            s.print(std::cout);
+        int n = 1;                                           // solution number for labeling
+        for (const Puzzle& s : solver.getSolutions()) {      // goes through every solution
+            std::cout << "\nSolution " << n++ << ":\n";      //prints lable then increments n by one
+            s.print(std::cout); // prints solved grid
         }
-        std::cout << "\n";
+        std::cout << "\n";   // blank line after last solution
     }
 
 private:
