@@ -5,7 +5,7 @@
  * Inputs       : Puzzle files
  * Output       : solved puzzles in the form of terminal output
  * Collaborators: Claude
- * Other sources: 
+ * Other sources: none
  * Author       : Nathaniel Lanter
  * Creation date: 10/15/2026
  * Revision date: 10/15/2026
