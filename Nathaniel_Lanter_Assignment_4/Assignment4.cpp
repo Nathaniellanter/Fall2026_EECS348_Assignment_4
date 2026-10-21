@@ -27,11 +27,11 @@ public:
     static const int SIZE = 9;                 // size of the sudoku
 
     Puzzle() {                                  //constructor
-        for (auto& row : cells) row.fill(0);  
+        for (auto& row : cells) row.fill(0);  //sets every cell in the sudoku puzzle to 0
     }
 
     //loads file
-    bool loadFromFile(const std::string& fileName) {
+    bool loadFromFile(const std::string& fileName) { 
         std::ifstream in(fileName);            // finds file by name
         if (!in) return false;                 // if file not found the function returns false
         int count = 0;                         //number of cells read, bounds while loop
@@ -172,10 +172,10 @@ public:
         Solver solver(puzzle);                               // 
         int count = solver.solve();                          // 
         if (count == 0) {                                    // 
-            std::cout << "\nNo solution found\n\n";
+            std::cout << "\nNo solution found\n\n";          //
             return;
         }
-        std::cout << "\nSolutions found: " << count << "\n"; // 
+        std::cout << "\nSolutions found: " << count << "\n"; // how many solutions there are
         int n = 1;                                           // solution number for labeling
         for (const Puzzle& s : solver.getSolutions()) {      // goes through every solution
             std::cout << "\nSolution " << n++ << ":\n";      //prints lable then increments n by one
