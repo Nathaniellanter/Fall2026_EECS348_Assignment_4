@@ -9,7 +9,11 @@
  * Author       : Nathaniel Lanter
  * Creation date: 10/15/2026
  * Revision date: 10/15/2026
+ * 
+ * 
  */
+
+
 
 #include <iostream>   // input and output library
 #include <fstream>    // allows for file input 
@@ -181,13 +185,13 @@ public:
     }
 
 private:
-    std::string fileName;                                    // 
+    std::string fileName;                                    // name of the puzzle file
 };
 
 int main() {
-    for (int i = 1; i <= 5; i++) {                           // 
+    for (int i = 1; i <= 5; i++) {                           // goes through puzzles 1 to 5
         PuzzleRunner runner("puzzle" + std::to_string(i) + ".txt");  // 
-        runner.run();                                        // 
+        runner.run();                                        // loads and solves puzzle and prints
     }
-    return 0;                                                // 
+    return 0;                                                // program end
 }
