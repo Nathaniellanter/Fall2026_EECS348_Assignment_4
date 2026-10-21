@@ -138,17 +138,17 @@ private:
                 }
             }
         }
-        if (bestCount == 0) return;                 //
+        if (bestCount == 0) return;                 // a cell has no options os a  previous choice was wrong, backtrack
 
-        int b = boxIndex(bestR, bestC);             // 
-        for (int d = 1; d <= 9; d++) {              //
-            int bit = 1 << (d - 1);                 // 
-            if (!(bestMask & bit)) continue;        // 
-            board.set(bestR, bestC, d);             // 
-            rowUsed[bestR] |= bit; colUsed[bestC] |= bit; boxUsed[b] |= bit;  // 
-            search(filled + 1);                     // 
-            board.set(bestR, bestC, 0);             // 
-            rowUsed[bestR] &= ~bit; colUsed[bestC] &= ~bit; boxUsed[b] &= ~bit;  // 
+        int b = boxIndex(bestR, bestC);             // box of the chosen cell
+        for (int d = 1; d <= 9; d++) {              // tries each digit 1-9
+            int bit = 1 << (d - 1);                 // bit for this digit
+            if (!(bestMask & bit)) continue;        // skip digits that can't go in this cell
+            board.set(bestR, bestC, d);             // puts the digit in the cell
+            rowUsed[bestR] |= bit; colUsed[bestC] |= bit; boxUsed[b] |= bit;  // marks digit used in its row, column, and box
+            search(filled + 1);                     // recursion with one more cell fill
+            board.set(bestR, bestC, 0);             // undoes the digit (backtrack)
+            rowUsed[bestR] &= ~bit; colUsed[bestC] &= ~bit; boxUsed[b] &= ~bit;  // marks digit as unused again
         }
     }
 };
