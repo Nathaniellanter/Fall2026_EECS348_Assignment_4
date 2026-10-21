@@ -33,10 +33,10 @@ public:
         int count = 0;                         //number of cells read, bounds while loop
         char ch;                               //character in sudoku grid
         while (count < SIZE * SIZE && in.get(ch)) {  // loop to convert files into something the program can work with
-            if (ch >= '1' && ch <= '9') {              // 
+            if (ch >= '1' && ch <= '9') {              // check if valid digit
                 cells[count / SIZE][count % SIZE] = ch - '0';  // 
                 count++;                               //
-            } else if (ch == '_' || ch == '0' || ch == '.') {  //
+            } else if (ch == '_' || ch == '0' || ch == '.') {  //check if valid character
                 cells[count / SIZE][count % SIZE] = 0;         // 
                 count++;                                       // 
             }                                          // 
