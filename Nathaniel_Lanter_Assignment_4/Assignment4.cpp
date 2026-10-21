@@ -53,20 +53,20 @@ public:
 
     // prints the grid with lines between the three 3x3 blocks
     void print(std::ostream& out) const {
-        for (int r = 0; r < SIZE; r++) {                    // 
-            if (r > 0 && r % 3 == 0) out << "------+-------+------\n";  // 
-            for (int c = 0; c < SIZE; c++) {                // 
-                if (c > 0 && c % 3 == 0) out << "| ";       // 
-                if (cells[r][c] == 0) out << "_";           // 
-                else out << cells[r][c];                    // 
-                out << " ";                                 // 
+        for (int r = 0; r < SIZE; r++) {                    // goes through each row
+            if (r > 0 && r % 3 == 0) out << "------+-------+------\n";  // line between blcok rows
+            for (int c = 0; c < SIZE; c++) {                // goes through each column
+                if (c > 0 && c % 3 == 0) out << "| ";       // line between block column
+                if (cells[r][c] == 0) out << "_";           // blank cell prints as underscore
+                else out << cells[r][c];                    // filled cell prints its number
+                out << " ";                                 // space between cells
             }
-            out << "\n";                                    // 
+            out << "\n";                                    // new line at the end of row
         }
     }
-
+//
 private:
-    std::array<std::array<int, SIZE>, SIZE> cells;          // 
+    std::array<std::array<int, SIZE>, SIZE> cells;          // the 9x9 grid, 0 = blank
 };
 
 //solves the puzzle using recursive backtracking
@@ -76,21 +76,21 @@ public:
         for (int i = 0; i < 9; i++) rowUsed[i] = colUsed[i] = boxUsed[i] = 0;  // nothing used yet
     }
 
-    // returns the 
+    // runs solver and returns found solutions
     int solve() {
-        solutions.clear();                          // 
-        if (!initMasks()) return 0;                 // 
-        search(countGivens());                      // 
-        return (int)solutions.size();               //
+        solutions.clear();                          // clears old solutions
+        if (!initMasks()) return 0;                 // if given numbers break the rules there is no solution
+        search(countGivens());                      // starts recursion with the given cells counted as filled
+        return (int)solutions.size();               // number of solutions found
     }
 
-    const std::vector<Puzzle>& getSolutions() const { return solutions; }  // 
+    const std::vector<Puzzle>& getSolutions() const { return solutions; }  // gives access to the solution
 
 private:
-    Puzzle board;                                   //
-    int rowUsed[9], colUsed[9], boxUsed[9];         // 
-    std::vector<Puzzle> solutions;                  // 
-    static int boxIndex(int r, int c) { return (r / 3) * 3 + (c / 3); }  // 
+    Puzzle board;                                   // working copy of the puzzle
+    int rowUsed[9], colUsed[9], boxUsed[9];         // each bit says if a digit is already used in that row column or box
+    std::vector<Puzzle> solutions;                  // every solution found
+    static int boxIndex(int r, int c) { return (r / 3) * 3 + (c / 3); }  // turns row and column into box number 0-8
 
     int countGivens() const {                       // 
         int n = 0;
