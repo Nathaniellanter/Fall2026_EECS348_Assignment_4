@@ -109,32 +109,32 @@ private:
                 int bit = 1 << (d - 1);             // makes a number with only the bit for this digit set
                 int b = boxIndex(r, c);             // which box this cell is in
                 if ((rowUsed[r] & bit) || (colUsed[c] & bit) || (boxUsed[b] & bit))
-                    return false;                   // 
-                rowUsed[r] |= bit;                  // 
-                colUsed[c] |= bit;                  // 
-                boxUsed[b] |= bit;                  // 
+                    return false;                   // digit already used in row, column or box so the puzzle is invalid
+                rowUsed[r] |= bit;                  // marks digit used in this row
+                colUsed[c] |= bit;                  // marks digit used in this column
+                boxUsed[b] |= bit;                  // marks digit used in this box
             }
         }
-        return true;                                //
+        return true;                                // all given numbers are fine
     }
 
-    //
+    // recursive search, fillled is how many cells are filled so far
     void search(int filled) {
-        if (filled == 81) {                         // 
-            solutions.push_back(board);             //
-            return;                                 // 
+        if (filled == 81) {                         // base case, every cell is filled
+            solutions.push_back(board);             // saves a copy of the solved board
+            return;                                 // goes back to look for other solutions
         }
 
-        // 
-        int bestR = -1, bestC = -1, bestMask = 0, bestCount = 10;
-        for (int r = 0; r < 9; r++) {
-            for (int c = 0; c < 9; c++) {
-                if (board.get(r, c) != 0) continue;                 // 
-                int mask = ~(rowUsed[r] | colUsed[c] | boxUsed[boxIndex(r, c)]) & 0x1FF;  //
-                int cnt = __builtin_popcount(mask);                 //
-                if (cnt < bestCount) {                              // 
-                    bestCount = cnt; bestMask = mask;               //
-                    bestR = r; bestC = c;                           // 
+        // finds the empty cell with the fewest possible digits, this keeps the search small
+        int bestR = -1, bestC = -1, bestMask = 0, bestCount = 10; // best cell so far, 10 is more than any cell can have
+        for (int r = 0; r < 9; r++) { //each row
+            for (int c = 0; c < 9; c++) { // each column
+                if (board.get(r, c) != 0) continue;                 // skip filled cells
+                int mask = ~(rowUsed[r] | colUsed[c] | boxUsed[boxIndex(r, c)]) & 0x1FF;  // bits left over are digits that can still go here
+                int cnt = __builtin_popcount(mask);                 // counts how many digits can go here
+                if (cnt < bestCount) {                              // fewer options than the best cell so far
+                    bestCount = cnt; bestMask = mask;               // remember the count and the options
+                    bestR = r; bestC = c;                           // remember where the cell iss
                 }
             }
         }
